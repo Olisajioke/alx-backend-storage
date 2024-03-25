@@ -3,7 +3,7 @@
 
 
 def top_students(mongo_collection):
-    '''A function that Prints all students in a collection sorted by average score.'''
+    '''A function that Prints all students in a collection sorted by averag'''
     my_students = mongo_collection.aggregate(
         [
             {
