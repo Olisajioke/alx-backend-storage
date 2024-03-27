@@ -23,13 +23,13 @@ def call_history(method: Callable) -> Callable:
     def wrapper(self, *args, **kwargs):
         input_key = f"{method.__qualname__}:inputs"
         output_key = f"{method.__qualname__}:outputs"
-        
+
         # Store input arguments
         self._redis.rpush(input_key, str(args))
-        
+
         # Execute the wrapped function
         result = method(self, *args, **kwargs)
-        
+ 
         # Store output
         self._redis.rpush(output_key, result)
         
@@ -52,7 +52,8 @@ def replay(method_name: str):
 
 class Cache:
     def __init__(self):
-        """Initializes a Cache object with a Redis client and flushes the database."""
+        """Initializes a Cache object with
+        a Redis client and flushes the database."""
         self._redis = redis.Redis()
         self._redis.flushdb()
 
@@ -66,7 +67,7 @@ class Cache:
     
     
 
-     def get(
+    def get(
             self,
             key: str,
             fn: Callable = None,
