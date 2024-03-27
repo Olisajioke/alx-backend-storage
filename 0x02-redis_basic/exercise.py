@@ -29,10 +29,10 @@ def call_history(method: Callable) -> Callable:
 
         # Execute the wrapped function
         result = method(self, *args, **kwargs)
- 
+
         # Store output
         self._redis.rpush(output_key, result)
-        
+
         return result
     return wrapper
 
@@ -64,15 +64,13 @@ class Cache:
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
-    
-    
 
     def get(
             self,
             key: str,
             fn: Callable = None,
             ) -> Union[str, bytes, int, float]:
-        """Retrieves data from Redis with the specified key 
+        """Retrieves data from Redis with the specified key
         and applies the conversion function if provided."""
         data = self._redis.get(key)
         if data is None:
