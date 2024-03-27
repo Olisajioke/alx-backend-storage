@@ -8,6 +8,7 @@ from typing import Callable
 
 cache_redis = redis.Redis()
 
+
 def count_calls(func: Callable) -> Callable:
     '''Decorator function counts the number of times a function is called.'''
     @wraps(func)
